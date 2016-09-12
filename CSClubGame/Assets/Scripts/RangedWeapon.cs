@@ -90,7 +90,6 @@ public class RangedWeapon : MonoBehaviour {
             if(!infiniteAmmo)
             {
                 currentMagazine--;
-                //ammoCount--;
             }
 
             nextFire = Time.time + fireRate;
