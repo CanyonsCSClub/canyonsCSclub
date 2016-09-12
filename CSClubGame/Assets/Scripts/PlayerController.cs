@@ -34,7 +34,11 @@ public class PlayerController : MonoBehaviour {
     {
         if(Input.GetMouseButtonDown(0))
         {
-            pistol.Fire(shot, shotSpawn);
+            pistol.FireSemi(shot, shotSpawn);
+        }
+		if(Input.GetMouseButton(0))
+        {
+            pistol.FireFull(shot, shotSpawn);
         }
         if(Input.GetMouseButtonDown(1))
         {

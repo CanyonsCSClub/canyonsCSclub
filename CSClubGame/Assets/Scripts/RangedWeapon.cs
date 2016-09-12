@@ -18,11 +18,15 @@ public class RangedWeapon : MonoBehaviour {
 
     private float nextFire;
     private float reloadedTime;
+	
+	private float chargeStartTime;
 
     private bool infiniteAmmo;
     private bool isReloading;
     private bool isPiercing;
+	private bool isFullAuto;
 
+	
 
     //Default Constructor
     public RangedWeapon()
@@ -50,7 +54,7 @@ public class RangedWeapon : MonoBehaviour {
         reloadTime      = 1.0f;
 
         isPiercing      = true;
-
+		isFullAuto		= false;
 
     }
 	
@@ -79,9 +83,9 @@ public class RangedWeapon : MonoBehaviour {
     /// </summary>
     /// <param name="bullet">This is where the bullet GameObject gets called (Must have BulletMover Script on it)</param>
     /// <param name="bulletSpawn">This is the spawnpoint of the bullet, make sure it is attached to the player but not in the player</param>
-    public void Fire(GameObject bullet, Transform bulletSpawn)
+    public void FireSemi(GameObject bullet, Transform bulletSpawn)
     {
-        if (Time.time > nextFire && currentMagazine != 0  && !isReloading)
+        if (isFullAuto && Time.time > nextFire && currentMagazine != 0  && !isReloading)
         {
             if(!infiniteAmmo)
             {
@@ -94,17 +98,25 @@ public class RangedWeapon : MonoBehaviour {
             Debug.Log(string.Format("Firing: {0}/{1} : {2}",currentMagazine, magazineSize, ammoCount));
         }
     }
+	
+	public void FireFull(GameObject bullet, Transform bulletSpawn)
+	{
+		if (isFullAuto && Time.time > nextFire && currentMagazine != 0  && !isReloading)
+        {
+		
+		}
+	}
 
     // Start Charging up weapon if it is charged
-    public void ChargingFire()
+    public void ChargingFire(GameObject bullet, Transform bulletSpawn)
     {
-
+		//chargeStartTime = Time.time;
     }
 
     // Fire Charged Weapon
-    public void ChargedFire(float chargeTime)
+    public void FireCharged(GameObject bullet, Transform bulletSpawn)
     {
-
+		//float chargedTime = Time.time - chargeStartTime;
     }
 
     //  Spawn the bullet
@@ -112,6 +124,7 @@ public class RangedWeapon : MonoBehaviour {
     {
         GameObject bulletClone = (GameObject)Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
 
+		//TODO: Make Bullet Class
         bulletClone.GetComponent<BulletMover>().speed = velocity;
         bulletClone.GetComponent<BulletMover>().damage = damage;
         bulletClone.GetComponent<BulletMover>().range = range;
