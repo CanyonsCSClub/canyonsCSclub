@@ -17,13 +17,13 @@ public class SubMachineGun : RangedWeapon
 
         //should probably have a file that loads this
         ammoCount       = 300;
-        magazineSize    = 30;
-        currentMagazine = 30;
+        magazineSize    = 50;
+        currentMagazine = 50;
 
-        damage          = 2;
+        damage          = 1;
         range           = 10;
         velocity        = 2000;
-        fireRate        = 0.05f;
+        fireRate        = 0.01f;
         reloadTime      = 1.0f;
 
         isPiercing = false;
